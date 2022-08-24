@@ -1,6 +1,11 @@
 <?php
 
-$id_task_bitrix = (int)mb_substr($_POST['PLACEMENT_OPTIONS'], 11, 3);
+if($_POST['PLACEMENT_OPTIONS']){
+    $id_task_bitrix = (int)mb_substr($_POST['PLACEMENT_OPTIONS'], 11, 3);
+    file_put_contents('id_task_bitrix.txt', $id_task_bitrix);
+}else{
+    $id_task_bitrix = (int)file_get_contents('id_task_bitrix.txt');
+}
 
 $sql = "SELECT * FROM `tasks` WHERE `id_task_bitrix` = $id_task_bitrix";
 include 'connect.php';
